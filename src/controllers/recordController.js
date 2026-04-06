@@ -55,11 +55,16 @@ exports.updateRecord = async (req, res) => {
 
 // Soft delete record – same permission as of the update
 exports.deleteRecord = async (req, res) => {
+  
   const record = await FinancialRecord.findById(req.params.id);
+  
   if (!record) return res.status(404).json({ error: 'Record not found' });
+  
+  
   if (req.user.role !== 'admin' && record.userId.toString() !== req.user._id.toString()) {
     return res.status(403).json({ error: 'Not authorized' });
   }
+  
   record.deletedAt = new Date();
   await record.save();
   res.json({ message: 'Record soft deleted' });

@@ -15,7 +15,7 @@ const registerValidation = [
   body('email').isEmail().withMessage('Valid email required'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
   body('role').optional().isIn(['viewer', 'analyst', 'admin']).withMessage('Invalid role'),
-  handleValidationErrors, // ✅ now properly accepts next
+  handleValidationErrors, 
 ];
 
 // rules for financial records

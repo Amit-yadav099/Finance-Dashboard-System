@@ -10,9 +10,12 @@ router.use(protect);
 // Viewer can only GET
 router.get('/', allowRoles('viewer', 'analyst', 'admin'), getRecords);
 
+
 // Analyst & Admin can modify
 router.post('/', allowRoles('analyst', 'admin'), recordValidation, createRecord);
+
 router.put('/:id', allowRoles('analyst', 'admin'), recordValidation, updateRecord);
+
 router.delete('/:id', allowRoles('analyst', 'admin'), deleteRecord);
 
 module.exports = router;
